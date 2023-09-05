@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemAdapter(var list:List<Result>):RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
   inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
       var image:ImageView=view.findViewById(R.id.characterImage)
       var name:TextView=view.findViewById(R.id.showName)
-//      var species:TextView=view.findViewById(R.id.species)
-//      var gender:TextView=view.findViewById(R.id.gender)
-//      var status:TextView=view.findViewById(R.id.status)
       val r2: LinearLayout =view.findViewById(R.id.r2)
       init {
           view.setOnClickListener{
@@ -42,13 +40,14 @@ class ItemAdapter(var list:List<Result>):RecyclerView.Adapter<ItemAdapter.ViewHo
         var listData =list[position]
         holder.image.setImage(listData.image)
         holder.name.text=listData.name
-//        holder.species.text=listData.species
-//        holder.gender.text=listData.gender
-//        holder.status.text=listData.status
         holder.r2.setOnClickListener {
             val i=Intent(holder.r2.context,MainActivity2::class.java)
             i.putExtra("clickedItem",listData)
             holder.r2.context.startActivity(i)
+        }
+        holder.image.setOnClickListener{
+            val dialogFragment = PreviewFragment(listData.image)
+            dialogFragment.show((holder.itemView.context as AppCompatActivity).supportFragmentManager,"dialogtag")
         }
     }
     }

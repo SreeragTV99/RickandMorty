@@ -22,17 +22,13 @@ class MainActivity2 : AppCompatActivity() {
         val imageView:ImageView=findViewById(R.id.background)
         Glide.with(this).asGif().load(R.drawable.bg3).into(imageView)
         val clickedItem=intent?.getParcelableExtra<Result>("clickedItem")
-name.text=clickedItem?.name
+        name.text=clickedItem?.name
         species.text=clickedItem?.species
         gender.text=clickedItem?.gender
         status.text=clickedItem?.status
         if (clickedItem != null) {
             image.setImage(clickedItem.image)
         }
-
-
-
-
 
     }
 }
